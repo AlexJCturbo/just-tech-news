@@ -60,6 +60,7 @@ router.put('/:id', (req, res) => {
   //Expects {username: 'Toby', email: 'toby@gmail.com', password: '123456'}
   //This .update() method combines the parameters for creating data and looking up data. If req.body has exact key/value pairs to match the model, you can just use `req.body` instead. The associated SQL syntax be: UPDATE users SET username = 'Toby', email: 'toby@gmail.com', password: '123456newPassword1234' WHERE id = 1;
   User.update(req.body, {
+    individualHooks: true,
     where: {
       id: req.params.id
     }
