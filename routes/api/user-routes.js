@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 });
 
 //IMPORTANT: Sequelize is a JavaScript Promise-based library, meaning we get to use .then() with all of the model methods.
+
 // GET /api/users/1
 router.get('/:id', (req, res) => {
   User.findOne({
@@ -39,6 +40,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
 //POST /api/users
 router.post('/', (req, res) => {
   //Expects {username: 'Toby', email: 'toby@gmail.com', password: '123456'}
@@ -54,6 +56,34 @@ router.post('/', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+
+//POST for login
+//For login we use POST methods. The reason is that a GET method carries the request parameter appended in the URL string, whereas a POST method carries the request parameter in req.body which makes it a more secure way of transferring data from the client to the server
+router.post('/login', (req, res) => {
+  // expects {email: 'toby@fluff.com', password: '123456'}
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+    //res.json({ user: dbUserData });
+    //Verify user
+    //pass the plaintext password, which is stored in req.body.password, into .checkPassword() as the argument. The .compareSync() method inside .checkPassword() method, can then confirm or deny that the supplied password matches the hashed password stored on the object. .checkPassword() will then return true on success or false on failure.
+    const validPassword = dbUserData.checkPassword(req.body.password);
+    //Confirms true or false to grant login access
+    if (!validPassword) {
+      res.status(400).json({ message: 'Incorrect password!' });
+      return;
+    }
+    res.json({ user: dbUserData, message: 'You are now logged in!' });
+  });
+});
+
 
 //PUT /api/users/1
 router.put('/:id', (req, res) => {
@@ -77,6 +107,7 @@ router.put('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+
 
 //DELETE /api/users/1
 router.delete('/:id', (req, res) => {
