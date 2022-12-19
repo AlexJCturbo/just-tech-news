@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   console.log('========================');
   Post.findAll({
     attributes: ['id', 'post_url', 'title', 'created_at'],
+    //The "order" property is assigned a nested array that orders by the created_at column in descending order.
     order: [['created_at', 'DESC']],
     //The Sequelize "include" property makes the JOIN to the User table. We do this by adding the property include. The value of include is an array of objects, each of which describes a JOIN to make. In this case, we only need to JOIN to the User table, so we only need one object in the array.
     include: [
@@ -86,6 +87,7 @@ router.put('/:id', (req, res) => {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
+      //Sending back data that has been modified and stored in the database
       res.json(dbPostData);
     })
     .catch(err => {
