@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Vote } = require('../../models');
 
 //GET /api/users, setting up the API endpoint
 router.get('/', (req, res) => {
@@ -25,7 +25,20 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: { exclude: ['password'] }
+    attributes: { exclude: ['password'] },
+    include: [
+      {
+        model: Post,
+        attributes: ['id', 'title', 'post_url', 'created_at']
+      },
+      {
+        model: Post,
+        attributes: ['title'],
+        through: Vote,
+        as: 'voted_posts'
+        //Now when we query a single user, we'll receive the title information of every post they've ever voted on
+      }
+    ]
   })
     .then(dbUserData => {
       if (!dbUserData) {
