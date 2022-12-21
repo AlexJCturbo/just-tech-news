@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Vote } = require('../../models');
+const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
 
 //we include the User model for the post-routes because in a query to the post table, we would like to retrieve not only information about each post, but also the user that posted it. With the foreign key, user_id, we can form a JOIN, an essential characteristic of the relational data model
@@ -23,6 +23,15 @@ router.get('/', (req, res) => {
       {
         model: User,
         attributes: ['username']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        //Include User model itself so it can attach the username to the comment.
+        include: {
+          model: User,
+          attributes: ['username']
+        }
       }
     ]
   })
@@ -52,6 +61,14 @@ router.get('/:id', (req, res) => {
       {
         model: User,
         attributes: ['username']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
       }
     ]
   })

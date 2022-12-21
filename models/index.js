@@ -1,6 +1,7 @@
 const User = require('./User');
 const Post = require('./Post');
 const Vote = require('./Vote');
+const Comment = require('./Comment');
 
 //A user can make many posts, but a post only belongs to a single user.
 //Create associations
@@ -46,6 +47,23 @@ Post.hasMany(Vote, {
 });
 //By also creating one-to-many associations directly between these models, we can perform aggregated SQL functions between models. In this case, we'll see a total count of votes for a single post when queried.
 
-module.exports = { User, Post, Vote };
+Comment.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id'
+});
+
+User.hasMany(Comment, {
+  foreignKey: 'user_id'
+});
+
+Post.hasMany(Comment, {
+  foreignKey: 'post_id'
+});
+//Note that we don't have to specify Comment as a through table like we did for Vote. This is because we don't need to access Post through Comment; we just want to see the user's comment and which post it was for. Thus, the query will be slightly different.
+
+module.exports = { User, Post, Vote, Comment };
 
 //Because a vote belongs to a post, instead of creating an endpoint at api/vote, we simply will create a new endpoint at /api/post.

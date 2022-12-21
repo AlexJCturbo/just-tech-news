@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Vote } = require('../../models');
+const { User, Post, Vote, Comment } = require('../../models');
 
 //GET /api/users, setting up the API endpoint
 router.get('/', (req, res) => {
@@ -37,6 +37,15 @@ router.get('/:id', (req, res) => {
         through: Vote,
         as: 'voted_posts'
         //Now when we query a single user, we'll receive the title information of every post they've ever voted on
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'user_id', 'post_id', 'created_at'],
+        //Including the Post model on the Comment model so we can see on which posts this user commented
+        include: {
+          model: Post,
+          attributes: ['title']
+        }
       }
     ]
   })
