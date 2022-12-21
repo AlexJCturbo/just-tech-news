@@ -1,4 +1,4 @@
-//This file serves as a means to collect all of the API routes and package them up for us.
+//This file collects all of the API routes and package them up
 const router = require('express').Router();
 const userRoutes = require('./user-routes');
 const postRoutes = require('./post-routes');

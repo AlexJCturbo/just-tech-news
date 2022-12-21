@@ -3,12 +3,6 @@ const { Comment } = require('../../models');
 
 router.get('/', (req, res) => {
   Comment.findAll({
-    // attributes: [
-    //   'id',
-    //   'comment_text',
-    //   'user_id',
-    //   'post_id',
-    // ]
   })
     .then(dbCommentData => res.json(dbCommentData))
     .catch(err => {
