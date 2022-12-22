@@ -35,11 +35,23 @@ Then, just start the server on your computer by typing in the command line `npm 
 
 
 ## Screen Captures
-![ecommerce 01 POST categories](./utils/images/01_post_categories.png)
+POST user
+![just-tech-news 01 POST user](./utils/images/01_post_user.png)
 
-![ecommerce 02 POST products](./utils/images/02_post_products.png)
+GET users
+![just-tech-news 02 GET users](./utils/images/02_get_users.png)
 
-![ecommerce 01 GET products](./utils/images/03_get_products.png)
+PUT user
+![just-tech-news 03 PUT user](./utils/images/03_put_user.png)
+
+PUT upvote
+![just-tech-news 04 PUT upvote](./utils/images/05_put_vote.png)
+
+GET posts
+![just-tech-news 05 GET posts](./utils/images/04_get_posts.png)
+
+POST comment
+![just-tech-news 06 POST comment](./utils/images/08_post_comment.png)
 ###### [Back to Index](#Table-of-Contents)
 
 
