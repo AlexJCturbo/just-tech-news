@@ -6,6 +6,7 @@
 - [Usage](#Usage)
 - [Screen Captures](#Screen-Captures)
 - [Technologies](#Technologies)
+- [Links and Testing](#Links-and-Testing)
 
 ## Project Description
 Just Tech News is a project that develops the back-end for a news-based site using a SQL database. It was developed by working with the Express.js API and using Sequelize to configure and interact with a MySQL database.
@@ -61,4 +62,9 @@ POST comment
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
 ![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+###### [Back to Index](#Table-of-Contents)
+
+
+## Links and Testing
+You can use Insomnia or Postman for testing the APIs of the app. Use the following URL: [https://justtechnews-pups.herokuapp.com/api/](https://justtechnews-pups.herokuapp.com/) and just add the type of HTTP request (GET, POST, PUT, etc.) and the corresponding endpoint to perform all the CRUD operations on this database, e.g. POST request @ https://justtechnews-pups.herokuapp.com/users
 ###### [Back to Index](#Table-of-Contents)
